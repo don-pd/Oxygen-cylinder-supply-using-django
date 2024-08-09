@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+{% if user.is_authenticated %}
+
+<div class="container-fluid">
+  <div class="row">
+      <!-- Header Section -->
+      <header class="col-12 text-center mb-4">
+          <h1>OXYGEN CYLINDER SUPPLY MANAGEMENT!</h1>
+          <p>Finding Joy In Giving You Services </p>
+      </header>
+  </div>
+
+  <div class="row">
+      <!-- Main Content Section -->
+      <section class="col-md-8 offset-md-2 text-center">
+          {% if user.is_authenticated %}
+              <h2>Hello, {{ user.username }}!</h2>
+              <p></p>
+          {% else %}
+              <h2>Join Us Today!</h2>
+              <p>Discover our amazing services and offers. <a href="{% url 'signup' %}">Sign Up</a> or <a href="{% url 'login' %}">Log In</a> to get started.</p>
+          {% endif %}
+      </section>
+  </div>
+
+  <div class="row mt-5">
+      <!-- Featured Sections -->
+      <div class="col-md-4 text-center">
+          <h3>Our Services</h3>
+          <p>Explore a range of services designed to meet your needs.</p>
+          <a href='#' class="btn btn-primary">Learn More</a>
+      </div>
+      <div class="col-md-4 text-center">
+          <h3>Latest News</h3>
+          <p>Stay updated with the latest news and updates from us.</p>
+          <a href="#" class="btn btn-primary">Read More</a>
+      </div>
+      <div class="col-md-4 text-center">
+          <h3>Contact Us</h3>
+          <p>Have any questions? Get in touch with our support team.</p>
+          <a href="#" class="btn btn-primary">Contact Us</a>
+      </div>
+  </div>
+</div>
+
+{% else %}
+
+<h1>Login</h1>
+
+<form method="POST" action="{% url 'home' %}">
+{% csrf_token %}
+<form>
+    <div class="mb-3">
+      
+      <input type="text" name="username" placeholder="username" required>
+    
+    </div>
+    <div class="mb-3">
+    
+      <input type="password" name="password" placeholder="password" required>
+    </div>
+
+    <button type="submit" class="btn btn-secondary">Submit</button>
+  </form>
+  
+</form>
+
+
+</div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+</head>
+<body>
+    <h1>Product List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Manufacturer</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                {% for pq in product_quantities %}
+                    {% if pq.product == product %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ pq.manufacturer.user.username }}</td>
+                            <td>{{ pq.quantity }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Manufacturer Totals</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>Total Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for manufacturer, total_quantity in manufacturer_totals.items %}
+                <tr>
+                    <td>{{ manufacturer.user.username }}</td>
+                    <td>{{ total_quantity }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>{% endblock %}
